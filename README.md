@@ -132,6 +132,12 @@ Usage
 | POST   | `/api/v1/usage`         | Record usage      |
 | GET    | `/api/v1/usage-summary` | Get usage summary |
 
+Body For api/v1/usage
+
+{
+    "units": 250
+}
+
 
 Invoices
 | Method | Endpoint                         | Description      |
@@ -140,6 +146,11 @@ Invoices
 | GET    | `/api/v1/invoices/{invoice}`     | View invoice     |
 | POST   | `/api/v1/invoices/{invoice}/pay` | Pay invoice      |
 | POST   | `/api/v1/invoices/generate`      | Generate invoice |
+
+Body For Invoice Generate 
+{
+    "month": "2026-01"
+}
 
 
 💳 Stripe Webhook Setup
