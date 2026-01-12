@@ -34,14 +34,19 @@ Stripe account
 ⚙️ Installation
 
 1️⃣ Clone the repository
+
 git clone https://github.com/masimarif88/usage-billing.git
+
 cd usage-billing
 
 2️⃣ Install dependencies
+
 composer install
 
 3️⃣ Environment setup
+
 cp .env.example .env
+
 php artisan key:generate
 
 Update .env with your database and Stripe credentials:
@@ -62,6 +67,7 @@ STRIPE_WEBHOOK_SECRET=whsec_xxx
 
 
 4️⃣ Run migrations
+
 php artisan migrate
 
 Run Database Seeder for plans and user creation 
@@ -69,9 +75,11 @@ Run Database Seeder for plans and user creation
 php artisan db:seed
 
 5️⃣ Start the server
+
 php artisan serve
 
 API will be available at:
+
 http://localhost:8000/api/v1
 
 
