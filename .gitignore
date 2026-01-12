@@ -1,0 +1,54 @@
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Dependencies
+/vendor/
+/node_modules/
+
+# Build files
+/public/hot
+/public/storage
+/storage/*.key
+/storage/debugbar
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/storage/framework/testing/*
+/bootstrap/cache/*
+
+# Logs
+/storage/logs/*
+/npm-debug.log*
+/yarn-error.log*
+/pnpm-debug.log*
+
+# IDE & OS files
+/.idea/
+/.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Laravel Mix / Vite
+/public/mix-manifest.json
+/public/build
+
+# PHPUnit
+/.phpunit.result.cache
+
+# Composer
+/composer.lock
+
+# Laravel Telescope
+/storage/telescope
+
+# Laravel Backup
+/storage/app/backup
+
+# Homestead / Valet
+/Homestead.yaml
+/Homestead.json
+/.valet
