@@ -52,17 +52,26 @@ php artisan key:generate
 Update .env with your database and Stripe credentials:
 
 APP_NAME="Usage Billing API"
+
 APP_ENV=local
+
 APP_KEY=
+
 APP_DEBUG=true
+
 APP_URL=http://localhost
 
 DB_DATABASE=usage_billing
+
 DB_USERNAME=root
+
 DB_PASSWORD=
 
+
 STRIPE_KEY=pk_test_xxx
+
 STRIPE_SECRET=sk_test_xxx
+
 STRIPE_WEBHOOK_SECRET=whsec_xxx
 
 
