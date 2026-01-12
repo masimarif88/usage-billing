@@ -21,9 +21,13 @@ MySQL / PostgreSQL (or any Laravel-supported DB)
 📦 Requirements
 
 PHP >= 8.1
+
 Composer
+
 MySQL / PostgreSQL
+
 Node.js & NPM (optional)
+
 Stripe account
 
 
@@ -61,6 +65,7 @@ STRIPE_WEBHOOK_SECRET=whsec_xxx
 php artisan migrate
 
 Run Database Seeder for plans and user creation 
+
 php artisan db:seed
 
 5️⃣ Start the server
