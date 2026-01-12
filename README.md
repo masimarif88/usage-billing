@@ -142,34 +142,46 @@ https://your-domain.com/api/v1/stripe/webhook
 2️⃣ Select events
 
 Recommended events:
+
 invoice.payment_succeeded
+
 invoice.payment_failed
+
 payment_intent.succeeded
+
 payment_intent.payment_failed
 
 3️⃣ Copy Webhook Secret
 
 Add it to .env:
+
 STRIPE_WEBHOOK_SECRET=whsec_xxxxxxxxx
 
 
 4️⃣ Test Webhook Locally (Optional)
 
 Install Stripe CLI:
+
 stripe listen --forward-to localhost:8000/api/v1/stripe/webhook
 
 
 Trigger test events:
+
 stripe trigger invoice.payment_succeeded
 
 
 🧪 API Testing
 
 You can test the API using:
+
 Postman
+
 Insomnia
+
 cURL
+
 Make sure to include:
+
 Authorization: Bearer YOUR_TOKEN
 
 
