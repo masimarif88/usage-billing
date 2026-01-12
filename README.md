@@ -1,59 +1,178 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+Usage Billing API (Laravel)
+A Laravel-based REST API for tracking usage, generating invoices, and handling payments with Stripe, secured using Laravel Sanctum.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+🚀 Features
 
-## About Laravel
+API authentication using Laravel Sanctum
+Record customer usage
+Get usage summary
+Generate and manage invoices
+Pay invoices
+Stripe webhook integration for payment events
+API versioning (/api/v1)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+🛠️ Tech Stack
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+PHP (Laravel)
+Laravel Sanctum (API authentication)
+Stripe (payments & webhooks)
+MySQL / PostgreSQL (or any Laravel-supported DB)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+📦 Requirements
 
-## Learning Laravel
+PHP >= 8.1
+Composer
+MySQL / PostgreSQL
+Node.js & NPM (optional)
+Stripe account
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+⚙️ Installation
 
-## Laravel Sponsors
+1️⃣ Clone the repository
+git clone https://github.com/masimarif88/usage-billing.git
+cd usage-billing
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+2️⃣ Install dependencies
+composer install
 
-### Premium Partners
+3️⃣ Environment setup
+cp .env.example .env
+php artisan key:generate
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+Update .env with your database and Stripe credentials:
 
-## Contributing
+APP_NAME="Usage Billing API"
+APP_ENV=local
+APP_KEY=
+APP_DEBUG=true
+APP_URL=http://localhost
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+DB_DATABASE=usage_billing
+DB_USERNAME=root
+DB_PASSWORD=
 
-## Code of Conduct
+STRIPE_KEY=pk_test_xxx
+STRIPE_SECRET=sk_test_xxx
+STRIPE_WEBHOOK_SECRET=whsec_xxx
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-## Security Vulnerabilities
+4️⃣ Run migrations
+php artisan migrate
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Run Database Seeder for plans and user creation 
+php artisan db:seed
 
-## License
+5️⃣ Start the server
+php artisan serve
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+API will be available at:
+http://localhost:8000/api/v1
+
+
+🔐 Authentication (Sanctum)
+Login
+POST /api/v1/login
+
+
+Request
+
+{
+  "email": "user@example.com",
+  "password": "password"
+}
+
+
+Response
+
+{
+  "token": "your_api_token_here"
+}
+
+
+Use the token in headers:
+Authorization: Bearer YOUR_TOKEN
+
+📚 API Endpoints
+🔑 Public Routes
+
+| Method | Endpoint                 | Description            |
+| ------ | ------------------------ | ---------------------- |
+| POST   | `/api/v1/login`          | User login             |
+| POST   | `/api/v1/stripe/webhook` | Stripe webhook handler |
+
+
+🔒 Authenticated Routes (Sanctum)
+
+Usage
+| Method | Endpoint                | Description       |
+| ------ | ----------------------- | ----------------- |
+| POST   | `/api/v1/usage`         | Record usage      |
+| GET    | `/api/v1/usage-summary` | Get usage summary |
+
+
+Invoices
+| Method | Endpoint                         | Description      |
+| ------ | -------------------------------- | ---------------- |
+| GET    | `/api/v1/invoices`               | List invoices    |
+| GET    | `/api/v1/invoices/{invoice}`     | View invoice     |
+| POST   | `/api/v1/invoices/{invoice}/pay` | Pay invoice      |
+| POST   | `/api/v1/invoices/generate`      | Generate invoice |
+
+
+💳 Stripe Webhook Setup
+
+1️⃣ Create webhook in Stripe Dashboard
+Endpoint URL:
+https://your-domain.com/api/v1/stripe/webhook
+
+2️⃣ Select events
+
+Recommended events:
+invoice.payment_succeeded
+invoice.payment_failed
+payment_intent.succeeded
+payment_intent.payment_failed
+
+3️⃣ Copy Webhook Secret
+
+Add it to .env:
+STRIPE_WEBHOOK_SECRET=whsec_xxxxxxxxx
+
+
+4️⃣ Test Webhook Locally (Optional)
+
+Install Stripe CLI:
+stripe listen --forward-to localhost:8000/api/v1/stripe/webhook
+
+
+Trigger test events:
+stripe trigger invoice.payment_succeeded
+
+
+🧪 API Testing
+
+You can test the API using:
+Postman
+Insomnia
+cURL
+Make sure to include:
+Authorization: Bearer YOUR_TOKEN
+
+
+🧹 Git Ignore
+
+Sensitive and generated files are excluded:
+.env
+vendor/
+node_modules/
+storage/
+
+📄 License
+This project is open-source and available under the MIT License.
+
+
+👨‍💻 Author
+
+Masim Arif
+GitHub: https://github.com/masimarif88

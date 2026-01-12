@@ -52,6 +52,13 @@ class User extends Authenticatable
         return $this->hasOne(Subscription::class);
     }
 
+    public function activeSubscription()
+    {
+        return $this->subscription()            
+            ->latest()
+            ->first();
+    }
+
     public function usageRecords()
     {
         return $this->hasMany(UsageRecord::class);
